@@ -1,126 +1,66 @@
 ---
 name: minions-component-evals
-description: Agent skills for working with Minions Component-evals MinionTypes. Provides CRUD operations, CLI usage, and best practices for AI agents managing minions-component-evals data.
+description: Pipeline-level benchmarks for RAG, routing, and classification
 ---
 
-# Minions Component-evals Agent Skills
+# minions-component-evals — Agent Skills
 
-Skills for agents operating on the `minions-component-evals` toolbox.
+## What is a Component Eval in the Minions Context?
 
-## Prerequisites
+```
+a benchmark for a pipeline component      → ComponentBenchmark
+a result from running a benchmark         → BenchmarkResult
+```
 
-Install the SDK and CLI:
+Evaluates isolated components: RAG correctness, routing accuracy, classification F1.
+
+## MinionTypes
+```ts
+// component-benchmark — component type, target, dataset, threshold
+// benchmark-result — score, metric breakdown, pass/fail, prompt version
+```
+
+## Agent SKILLS
+```markdown
+# EvalAgent Skills
+## Skill: Run Benchmark — execute against isolated component
+## Hard Rules — benchmarks must use versioned datasets for reproducibility
+```
+
+
+---
+
+## CLI Reference
+
+Install globally:
 
 ```bash
-# TypeScript
-pnpm add @minions-component-evals/sdk
-
-# Python
-pip install minions-component-evals
-
-# CLI
 pnpm add -g @minions-component-evals/cli
 ```
 
----
+Set `MINIONS_STORE` env var to control where data is stored (default: `.minions/`).
 
-## Using the CLI
-
-The `component-evals` CLI provides basic project info and utilities:
+### Discover Types
 
 ```bash
-# Show project info (SDK name, CLI name, Python package)
-component-evals info
+component-evals types list
+component-evals types show <type-slug>
 ```
 
-Use the CLI as the primary interface for scripted operations. For programmatic access within agent code, use the SDK directly.
+### CRUD
 
----
-
-## Using the SDK
-
-### TypeScript
-
-```ts
-import { customTypes } from '@minions-component-evals/sdk/schemas';
-
-// List all available MinionTypes in this toolbox
-for (const type of customTypes) {
-  console.log(`${type.icon} ${type.name} (${type.slug})`);
-  console.log(`  ${type.description}`);
-  console.log(`  Fields: ${type.schema.map(f => f.name).join(', ')}`);
-}
-
-// Access a specific type
-const myType = customTypes.find(t => t.slug === 'YOUR_TYPE_SLUG');
+```bash
+component-evals create <type> -t "Title" -s "status"
+component-evals list <type>
+component-evals show <id>
+component-evals update <id> --data '{ "status": "active" }'
+component-evals delete <id>
+component-evals search "query"
 ```
 
-### Python
+### Stats & Validation
 
-```python
-from minions_component_evals.schemas import custom_types
-
-# List all available MinionTypes
-for t in custom_types:
-    print(f"{t.icon} {t.name} ({t.slug})")
-    print(f"  {t.description}")
+```bash
+component-evals stats
+component-evals validate ./my-minion.json
 ```
-
----
-
-## Skill: Create Minion
-
-When creating a new Minion of any type in this toolbox:
-
-1. Look up the MinionType from `customTypes` by slug
-2. Validate all required fields are present according to the schema
-3. Set `string` fields to their values, `number` fields to numeric values
-4. Set `select` fields to one of their valid options
-5. Set `boolean` fields to `true` or `false`
-6. Always include a timestamp for any `createdAt` or similar fields (ISO 8601 format)
-
----
-
-## Skill: Read / Query Minions
-
-When reading or searching for Minions:
-
-1. Query by MinionType slug to filter by type
-2. Use field values for secondary filtering
-3. For references (fields ending in `Id`), resolve the linked Minion for full context
-4. Return results in a structured format the calling agent can parse
-
----
-
-## Skill: Update Minion
-
-When updating an existing Minion:
-
-1. Load the current Minion by ID
-2. Validate the update against the MinionType schema
-3. Only modify the fields that need changing — preserve existing values
-4. If the type has a `status` field, follow valid status transitions
-5. If the type has an `updatedAt` field, set it to the current timestamp
-6. Log significant field changes for audit if the context requires it
-
----
-
-## Skill: Delete / Archive Minion
-
-When removing a Minion:
-
-1. Prefer soft-delete: set `status` to `"cancelled"` or `"archived"` if available
-2. Never hard-delete Minions that other Minions reference via ID fields
-3. Check for dependent Minions before any destructive operation
-4. If hard-delete is required, ensure all references are cleaned up first
-
----
-
-## Hard Rules
-
-- Every Minion MUST conform to its MinionType schema
-- All `select` fields must use valid option values
-- All ID reference fields must point to existing Minions
-- Timestamps must be in ISO 8601 format
-- Never create orphaned Minions — always set reference fields when applicable
-- This agent only writes to `minions-component-evals` — it reads from other toolboxes but never writes to them
