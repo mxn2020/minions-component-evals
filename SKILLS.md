@@ -1,6 +1,12 @@
 ---
 name: minions-component-evals
-description: Pipeline-level benchmarks for RAG, routing, and classification
+id: OC-0113
+version: 1.0.0
+description: "Pipeline-level benchmarks for RAG, routing, and classification"
+category: ai
+subcategory: general
+tags: ["minion", "ai", "general"]
+comments:
 ---
 
 # minions-component-evals — Agent Skills
