@@ -1,0 +1,8 @@
+name: "@minions-component-evals/docs"
+project_scope: child
+child_type: docs
+parent_project: minions-component-evals-workspace
+description: "Standard compliance definition for @minions-component-evals/docs"
+priority: high
+deploy_url: null
+tags: null

@@ -1,0 +1,8 @@
+name: "@minions-component-evals/cli"
+project_scope: child
+child_type: cli
+parent_project: minions-component-evals-workspace
+description: "CLI for minions-component-evals — Pipeline-level benchmarks for RAG, routing, and classification"
+priority: high
+deploy_url: null
+tags: null

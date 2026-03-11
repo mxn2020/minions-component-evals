@@ -1,3 +1,5 @@
+![CI](https://github.com/mxn2020/@minions-component-evals/sdk/actions/workflows/ci.yml/badge.svg) ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 # @minions-component-evals/sdk
 
 Pipeline-level benchmarks for RAG, routing, and classification

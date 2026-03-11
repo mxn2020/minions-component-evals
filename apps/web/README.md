@@ -1,0 +1,1 @@
+# @minions-component-evals/web\n\nStandard compliance definition for @minions-component-evals/web\n\n![CI](https://github.com/mxn2020/@minions-component-evals/web/actions/workflows/ci.yml/badge.svg) ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)\n
