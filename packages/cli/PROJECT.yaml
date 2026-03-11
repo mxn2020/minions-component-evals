@@ -6,3 +6,4 @@ description: "CLI for minions-component-evals — Pipeline-level benchmarks for 
 priority: high
 deploy_url: null
 tags: null
+category: minion-toolbox

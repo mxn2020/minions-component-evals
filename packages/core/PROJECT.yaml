@@ -6,3 +6,4 @@ description: "Pipeline-level benchmarks for RAG, routing, and classification"
 priority: high
 deploy_url: null
 tags: null
+category: minion-toolbox
