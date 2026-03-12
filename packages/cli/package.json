@@ -1,6 +1,6 @@
 {
   "name": "@minions-component-evals/cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CLI for minions-component-evals — Pipeline-level benchmarks for RAG, routing, and classification",
   "license": "MIT",
   "repository": {

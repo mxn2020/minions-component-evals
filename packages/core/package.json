@@ -1,6 +1,6 @@
 {
   "name": "@minions-component-evals/sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Pipeline-level benchmarks for RAG, routing, and classification",
   "type": "module",
   "main": "./dist/index.js",
